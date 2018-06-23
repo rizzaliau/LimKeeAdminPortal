@@ -185,7 +185,25 @@
                                 </div></font>
                                 
                                 <div class="card-body">
-
+                                    <form method="post" accept-charset="utf-8" action="changePasswordController" >
+                                        <div class="row">
+                                            <div class="col-md-5 pr-1">
+                                                <div class="form-group">
+                                                    <label>New Password</label>
+                                                    <input type="password" name="newPass1" class="form-control" placeholder="Password">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4 pl-1">
+                                                <div class="form-group">
+                                                    <label for="exampleInputEmail1">Re-enter New Password</label>
+                                                    <input type="password" name="newPass2" class="form-control" placeholder="Password">
+                                                </div>
+                                            </div>
+                                            
+                                        </div>
+                                        <button type="submit" class="btn btn-info btn-fill pull-right">Update Profile</button>
+                                        <div class="clearfix"></div>
+                                    </form>
                                 </div>
                             </div>
                         </div>

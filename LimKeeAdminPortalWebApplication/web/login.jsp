@@ -1,8 +1,9 @@
 <%-- 
-    Document   : login2
-    Created on : 9 May, 2018, 4:36:59 PM
+    Document   : login.jsp
+    Created on : 19 Jun, 2018, 11:03:28 PM
     Author     : Rizza
 --%>
+
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
@@ -43,7 +44,7 @@
 
                     %> 
                     </font>
-                    <span class="logmod__heading-subtitle">Enter your user and password <strong>to sign in</strong> 请填写用户名和/或密码</span>
+                    <span class="logmod__heading-subtitle">Enter your user and password 下载谷 <strong>to sign in</strong></span>
                 </div> 
                 
                 

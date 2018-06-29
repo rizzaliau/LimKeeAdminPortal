@@ -166,31 +166,20 @@
                                 
                                 <div class="col-md-8"><font color="red">
                                  <%                                
-                                    //String passwordErrorMsg = (String) request.getAttribute("diffPassword");
-                                    //String passwordUpdate = (String)request.getAttribute("updateSuccess");
-                                    String status = (String)request.getAttribute("status");
+                                    String passwordErrorMsg = (String) request.getAttribute("diffPassword");
+                                    String passwordUpdate = (String)request.getAttribute("updateSuccess");
                                     
-                                    
-//                                    if (passwordErrorMsg != null) {
-//                                        out.print("</br>");
-//                                        out.print(passwordErrorMsg);
-//                                        out.print("</br>");
-//                                    }
-//                                    
-//                                    if (passwordUpdate!=null){
-//                                        out.print("</br>");
-//                                        out.print(passwordUpdate);
-//                                        out.print("</br>");
-//                                    }
-
-                                    if (status!=null){
+                                    if (passwordErrorMsg != null) {
                                         out.print("</br>");
-                                        out.print(status);
+                                        out.print(passwordErrorMsg);
                                         out.print("</br>");
                                     }
-
-
-
+                                    
+                                    if (passwordUpdate!=null){
+                                        out.print("</br>");
+                                        out.print(passwordUpdate);
+                                        out.print("</br>");
+                                    }
 
                                 %> 
                                 </div></font>

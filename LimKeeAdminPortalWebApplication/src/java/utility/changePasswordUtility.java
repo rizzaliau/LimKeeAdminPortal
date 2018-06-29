@@ -33,9 +33,15 @@ public class changePasswordUtility {
         //out.println("Password retrieved is :"+newPassword);
         
         if (!(newPassword1.equals(newPassword2))){
-            request.setAttribute("diffPassword", "Passwords do not match! Please re-enter password");
-
+            
+            request.setAttribute("status", "Passwords do not match! Please re-enter password. 密码确认不符, 请重新输入密码");
             request.getRequestDispatcher("dashboard.jsp").forward(request, response);
+            
+        }else if(newPassword1.equals("") || newPassword2.equals("")){
+            
+            request.setAttribute("status", "Please fill in new password and/or re-enter password 请输入新密码");
+            request.getRequestDispatcher("dashboard.jsp").forward(request, response);
+        
         }else{
             String newPasswordHash = loginUtility.getSha256(newPassword2);
 
@@ -43,7 +49,7 @@ public class changePasswordUtility {
 
             UserDAO.update(userNameRetrieved,newPasswordHash);
 
-            request.setAttribute("updateSuccess", "Password updated successfully!");
+            request.setAttribute("status", "Password updated successfully!");
 
             request.getRequestDispatcher("dashboard.jsp").forward(request, response);
         }

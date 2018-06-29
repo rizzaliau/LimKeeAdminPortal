@@ -1,13 +1,19 @@
-<!DOCTYPE html>
+<%-- 
+    Document   : userMGMT
+    Created on : 12 May, 2018, 1:04:11 AM
+    Author     : Rizza
+--%>
 
-<%@include file="protect.jsp" %>
+
+<%@page import="entity.Debtor"%>
+<%@page import="java.util.Map"%>
+<%@page import="utility.debtorUtility"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-
+<!DOCTYPE html>
 <html lang="en">
-    
 
 <head>
-    <meta charset="UTF-8">
+    <meta charset="utf-8" />
     <link rel="apple-touch-icon" sizes="76x76" href="assets/img/apple-icon.png">
     <link rel="icon" type="image/png" href="assets/img/favicon.ico">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
@@ -35,38 +41,25 @@
             <div class="sidebar-wrapper">
                 <div class="logo">
                     <a href="#" class="simple-text">
-                        LIM KEE Admin Portal 下载谷
+                        LIM KEE Admin Portal
                     </a>
-                        <!--  Welcome-->
-                        <%
-                        String userName = request.getParameter("user");
-                        String passWord = request.getParameter("password");
-                        //String gender = (String)request.getAttribute("gender");
-                        //out.println(userName);
-                        
-                        String usernameSession = (String)session.getAttribute("username");
-                        
-                        //out.println(usernameSession);
-                        
-                        //out.println("Username retrieved from session is:"+usernameSession);
-                        
-                        %>
+     
                 </div>
                 <ul class="nav">
-                    <li class="nav-item active">
+                    <li>
                         <a class="nav-link" href="dashboard.jsp">
                             <i class="nc-icon nc-chart-pie-35"></i>
                             <p>Dashboard</p>
                         </a>
                     </li>
-                    <li>
-                        <a class="nav-link" href="./userMGMT.jsp">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="userMGMT.jsp">
                             <i class="nc-icon nc-circle-09"></i>
                             <p>User Mgmt</p>
                         </a>
                     </li>
                     <li>
-                        <a class="nav-link" href="./salesOrderMGMT.jsp">
+                        <a class="nav-link" href="./table.html">
                             <i class="nc-icon nc-notes"></i>
                             <p>Sales Order Mgmt</p>
                         </a>
@@ -102,7 +95,7 @@
             <!-- Navbar -->
             <nav class="navbar navbar-expand-lg " color-on-scroll="500">
                 <div class=" container-fluid  ">
-                    <a class="navbar-brand" href="dashboard.jsp"> Dashboard </a>
+                    <a class="navbar-brand" href="#pablo"> Dashboard </a>
                     <button href="" class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-bar burger-lines"></span>
                         <span class="navbar-toggler-bar burger-lines"></span>
@@ -112,7 +105,7 @@
                         <ul class="nav navbar-nav mr-auto">
                             <li class="nav-item">
                                 <a href="#" class="nav-link" data-toggle="dropdown">
-                                    
+                                    <i class="nc-icon nc-palette"></i>
                                     <span class="d-lg-none">Dashboard</span>
                                 </a>
                             </li>
@@ -130,8 +123,19 @@
                                     <a class="dropdown-item" href="#">New Order 5</a>
                                 </ul>
                             </li>
+                            <li class="nav-item">
+                                <a href="#" class="nav-link">
+                                    <i class="nc-icon nc-zoom-split"></i>
+                                    <span class="d-lg-block">&nbsp;Search</span>
+                                </a>
+                            </li>
                         </ul>
                         <ul class="navbar-nav ml-auto">
+                            <li class="nav-item">
+                                <a class="nav-link" href="#pablo">
+                                    <span class="no-icon">Account</span>
+                                </a>
+                            </li>
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <span class="no-icon">Dropdown</span>
@@ -146,7 +150,7 @@
                                 </div>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="logout.jsp">
+                                <a class="nav-link" href="#pablo">
                                     <span class="no-icon">Log out</span>
                                 </a>
                             </li>
@@ -154,109 +158,100 @@
                     </div>
                 </div>
             </nav>
-            <!-- End Navbar -->
+            
+            <%
+                Map<Integer, Debtor> debtorMap = debtorUtility.getDebtorMap();
+            %>
+            
             <div class="content">
                 <div class="container-fluid">
                     <div class="row">
-                        <div class="col-md-8">
-                            <div class="card">
-                                <div class="card-header">
-                                    <h4 class="card-title">Edit account</h4>
+                        <div class="col-md-12">
+                            <div class="card strpied-tabled-with-hover">
+                                <div class="card-header ">
+
+                                    <h4 class="card-title">User Management</h4>
+                                    <p class="card-category">User list</p>
                                 </div>
-                                
-                                <div class="col-md-8"><font color="red">
-                                 <%                                
-                                    //String passwordErrorMsg = (String) request.getAttribute("diffPassword");
-                                    //String passwordUpdate = (String)request.getAttribute("updateSuccess");
-                                    String status = (String)request.getAttribute("status");
+                                <div class="card-body table-full-width table-responsive">
+                                    <table class="table table-hover table-striped">
+                                        <tbody>
+                                        <center>Please fill-in the form below.</center>
+                                        <br>
+                                            <form method="post" action="newUserController">
+                                            <thead>
+<!--                                            <tr><thead><th>ID</th></thead>
+                                                <td><input type="text" size="10" name="ID"  ></td>
+                                            </tr>-->
+                                            <tr><thead><th>Debtor Code</th></thead>
+                                                <td><input type="text" size="10" name="debtorCode" ></td>
+                                            </tr>
+                                            <tr><thead><th>Company Code</th></thead>
+                                                <td><input type="text" size="10" name="companyCode" ></td>
+                                            </tr>
+                                            <tr><thead><th>HashPassword</th></thead>
+                                                <td><input type="text" size="10" name="hashPassword" ></td>
+                                            </tr>
+                                            <tr><thead><th>Company Name</th></thead>
+                                                <td><input type="text" size="10" name="companyName" ></td>
+                                            </tr>
+                                            <tr><thead><th>Debtor Name</th></thead>
+                                                <td><input type="text" size="10" name="debtorName" ></td>
+                                            </tr>
+                                            <tr><thead><th>deliverContact</th></thead>
+                                                <td><input type="text" size="10" name="deliverContact" ></td>
+                                            </tr>
+                                            <tr><thead><th>deliverFax1</th></thead>
+                                                <td><input type="text" size="10" name="deliverFax1" ></td>
+                                            </tr>
+                                            <tr><thead><th>invAddr1</th></thead>
+                                                <td><input type="text" size="10" name="inAddr1" ></td>
+                                            </tr>
+                                            <tr><thead><th>invAddr2</th></thead>
+                                                <td><input type="text" size="10" name="invAddr2" ></td>
+                                            </tr>
+                                            <tr><thead><th>invAddr3</th></thead>
+                                                <td><input type="text" size="10" name="invAddr3" ></td>
+                                            </tr>
+                                            <tr><thead><th>invAddr4d</th></thead>
+                                                <td><input type="text" size="10" name="invAddr4d" ></td>
+                                            </tr>
+                                            <tr><thead><th>deliverAddr1</th></thead>
+                                                <td><input type="text" size="10" name="deliverAddr1" ></td>
+                                            </tr>
+                                            <tr><thead><th>deliverAddr2</th></thead>
+                                                <td><input type="text" size="10" name="deliverAddr2" ></td>
+                                            </tr>
+                                            <tr><thead><th>deliverAddr3</th></thead>
+                                                <td><input type="text" size="10" name="deliverAddr3" ></td>
+                                            </tr>
+                                            <tr><thead><th>deliverAddr4</th></thead>
+                                                <td><input type="text" size="10" name="deliverAddr4" ></td>
+                                            </tr>
+                                            <tr><thead><th>displayTerm</th></thead>
+                                                <td><input type="text" size="10" name="displayTerm" ></td>
+                                            </tr>
+                                            <tr><thead><th>Status</th></thead>
+                                                <td><input type="text" size="10" name="status" ></td>
+                                            </tr>
+                                            <tr><thead><th>Route Number</th></thead>
+                                                <td><input type="text" size="10" name="routeNumber" ></td>
+                                            </tr>
+
+                                        </tbody>
+                                    </table>
                                     
-                                    
-//                                    if (passwordErrorMsg != null) {
-//                                        out.print("</br>");
-//                                        out.print(passwordErrorMsg);
-//                                        out.print("</br>");
-//                                    }
-//                                    
-//                                    if (passwordUpdate!=null){
-//                                        out.print("</br>");
-//                                        out.print(passwordUpdate);
-//                                        out.print("</br>");
-//                                    }
+                                    <input class="btn btn-info btn-fill pull-right" type="submit" name="submit"  value="Submit" />
 
-                                    if (status!=null){
-                                        out.print("</br>");
-                                        out.print(status);
-                                        out.print("</br>");
-                                    }
-
-
-
-
-                                %> 
-                                </div></font>
-                                
-                                <div class="card-body">
-                                    <form method="post" accept-charset="utf-8" action="changePasswordController" >
-                                        <div class="row">
-                                            <div class="col-md-5 pr-1">
-                                                <div class="form-group">
-                                                    <label>New Password</label>
-                                                    <input type="password" name="newPass1" class="form-control" placeholder="Password">
-                                                </div>
-                                            </div>
-                                            <div class="col-md-4 pl-1">
-                                                <div class="form-group">
-                                                    <label for="exampleInputEmail1">Re-enter New Password</label>
-                                                    <input type="password" name="newPass2" class="form-control" placeholder="Password">
-                                                </div>
-                                            </div>
-                                            
-                                        </div>
-                                        <button type="submit" class="btn btn-info btn-fill pull-right">Update Profile</button>
-                                        <div class="clearfix"></div>
-                                    </form>
+                                     </form>
+     
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-4">
-                            <div class="card card-user">
-                                <div class="card-image">
-                                    <img src="assets/limkee/jquerypic5.jpg" alt="...">
-                                </div>
-                                <div class="card-body">
-                                    <div class="author">
-                                        <a href="#">
-                                            <img class="avatar border-gray" src="../assets/limkee/jquerypic5.jpg" alt="...">
-                                            <h5 class="title">Mike Andrew</h5>
-                                        </a>
-                                        <p class="description">
-                                            michael24
-                                        </p>
-                                    </div>
-                                    <p class="description text-center">
-                                        "Lamborghini Mercy
-                                        <br> Your chick she so thirsty
-                                        <br> I'm in that two seat Lambo"
-                                    </p>
-                                </div>
-                                <hr>
-                                <div class="button-container mr-auto ml-auto">
-                                    <button href="#" class="btn btn-simple btn-link btn-icon">
-                                        <i class="fa fa-facebook-square"></i>
-                                    </button>
-                                    <button href="#" class="btn btn-simple btn-link btn-icon">
-                                        <i class="fa fa-twitter"></i>
-                                    </button>
-                                    <button href="#" class="btn btn-simple btn-link btn-icon">
-                                        <i class="fa fa-google-plus-square"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
+                        
+
+                       
+
             <footer class="footer">
                 <div class="container">
                     <nav>
@@ -390,12 +385,11 @@
 <script src="assets/js/light-bootstrap-dashboard.js?v=2.0.1" type="text/javascript"></script>
 <!-- Light Bootstrap Dashboard DEMO methods, don't include it in your project! -->
 <script src="assets/js/demo.js"></script>
-
 <script type="text/javascript">
     $(document).ready(function() {
         // Javascript method's body can be found in assets/js/demos.js
         demo.initDashboardPageCharts();
-        demo.showNotification();
+
     });
 </script>
 

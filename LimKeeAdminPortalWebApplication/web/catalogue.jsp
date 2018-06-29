@@ -1,10 +1,19 @@
-<!DOCTYPE html>
+<%-- 
+    Document   : userMGMT
+    Created on : 12 May, 2018, 1:04:11 AM
+    Author     : Rizza
+--%>
 
+<%@page import="entity.OrderItem"%>
+<%@page import="utility.salesOrderUtility"%>
+<%@page import="entity.SalesOrder"%>
 <%@include file="protect.jsp" %>
+<%@page import="entity.Debtor"%>
+<%@page import="java.util.Map"%>
+<%@page import="utility.debtorUtility"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-
+<!DOCTYPE html>
 <html lang="en">
-    
 
 <head>
     <meta charset="UTF-8">
@@ -35,37 +44,24 @@
             <div class="sidebar-wrapper">
                 <div class="logo">
                     <a href="#" class="simple-text">
-                        LIM KEE Admin Portal 下载谷
+                        LIM KEE Admin Portal
                     </a>
-                        <!--  Welcome-->
-                        <%
-                        String userName = request.getParameter("user");
-                        String passWord = request.getParameter("password");
-                        //String gender = (String)request.getAttribute("gender");
-                        //out.println(userName);
-                        
-                        String usernameSession = (String)session.getAttribute("username");
-                        
-                        //out.println(usernameSession);
-                        
-                        //out.println("Username retrieved from session is:"+usernameSession);
-                        
-                        %>
+     
                 </div>
                 <ul class="nav">
-                    <li class="nav-item active">
+                    <li>
                         <a class="nav-link" href="dashboard.jsp">
                             <i class="nc-icon nc-chart-pie-35"></i>
                             <p>Dashboard</p>
                         </a>
                     </li>
                     <li>
-                        <a class="nav-link" href="./userMGMT.jsp">
+                        <a class="nav-link" href="userMGMT.jsp">
                             <i class="nc-icon nc-circle-09"></i>
                             <p>User Mgmt</p>
                         </a>
                     </li>
-                    <li>
+                    <li class="nav-item active">
                         <a class="nav-link" href="./salesOrderMGMT.jsp">
                             <i class="nc-icon nc-notes"></i>
                             <p>Sales Order Mgmt</p>
@@ -102,7 +98,7 @@
             <!-- Navbar -->
             <nav class="navbar navbar-expand-lg " color-on-scroll="500">
                 <div class=" container-fluid  ">
-                    <a class="navbar-brand" href="dashboard.jsp"> Dashboard </a>
+                    <a class="navbar-brand" href="#pablo"> Dashboard </a>
                     <button href="" class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-bar burger-lines"></span>
                         <span class="navbar-toggler-bar burger-lines"></span>
@@ -112,7 +108,6 @@
                         <ul class="nav navbar-nav mr-auto">
                             <li class="nav-item">
                                 <a href="#" class="nav-link" data-toggle="dropdown">
-                                    
                                     <span class="d-lg-none">Dashboard</span>
                                 </a>
                             </li>
@@ -132,6 +127,7 @@
                             </li>
                         </ul>
                         <ul class="navbar-nav ml-auto">
+
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <span class="no-icon">Dropdown</span>
@@ -154,109 +150,92 @@
                     </div>
                 </div>
             </nav>
-            <!-- End Navbar -->
+            
+            <%
+                Map<Integer, OrderItem> catalogueMap = salesOrderUtility.getCatalogueMap();
+            %>
+            
             <div class="content">
                 <div class="container-fluid">
                     <div class="row">
-                        <div class="col-md-8">
-                            <div class="card">
-                                <div class="card-header">
-                                    <h4 class="card-title">Edit account</h4>
+                        <div class="col-md-12">
+                            <div class="card strpied-tabled-with-hover">
+                                <div class="card-header ">
+
+                                    <h4 class="card-title">Sales Order Management</h4>
+                                    <p class="card-category">Catalogue list </p>
                                 </div>
                                 
                                 <div class="col-md-8"><font color="red">
-                                 <%                                
-                                    //String passwordErrorMsg = (String) request.getAttribute("diffPassword");
-                                    //String passwordUpdate = (String)request.getAttribute("updateSuccess");
-                                    String status = (String)request.getAttribute("status");
-                                    
-                                    
-//                                    if (passwordErrorMsg != null) {
-//                                        out.print("</br>");
-//                                        out.print(passwordErrorMsg);
-//                                        out.print("</br>");
-//                                    }
-//                                    
-//                                    if (passwordUpdate!=null){
-//                                        out.print("</br>");
-//                                        out.print(passwordUpdate);
-//                                        out.print("</br>");
-//                                    }
+                                    <%                                
+                                        String msgStatus = (String) request.getAttribute("updateSuccess");
+                                        String msgStatus2 = (String) request.getAttribute("status");
 
-                                    if (status!=null){
-                                        out.print("</br>");
-                                        out.print(status);
-                                        out.print("</br>");
-                                    }
+                                        if (msgStatus != null) {
+                                            out.print("</br>");
+                                            out.print(msgStatus);
+                                            out.print("</br>");
+                                        }
+                                        
+                                        if (msgStatus2 != null) {
+                                            out.print("</br>");
+                                            out.print(msgStatus2);
+                                            out.print("</br>");
+                                        }
 
 
-
-
-                                %> 
+                                    %> 
                                 </div></font>
-                                
-                                <div class="card-body">
-                                    <form method="post" accept-charset="utf-8" action="changePasswordController" >
-                                        <div class="row">
-                                            <div class="col-md-5 pr-1">
-                                                <div class="form-group">
-                                                    <label>New Password</label>
-                                                    <input type="password" name="newPass1" class="form-control" placeholder="Password">
-                                                </div>
-                                            </div>
-                                            <div class="col-md-4 pl-1">
-                                                <div class="form-group">
-                                                    <label for="exampleInputEmail1">Re-enter New Password</label>
-                                                    <input type="password" name="newPass2" class="form-control" placeholder="Password">
-                                                </div>
-                                            </div>
+                                <br>
+
+                                <div class="card-body table-full-width table-responsive">
+                                    <table class="table table-hover table-striped">
+                                        <thead>
+                                            <th> </th>
+                                            <th>Item Code</th>
+                                            <th>Picture</th>
+                                            <th>Description</th>
+                                            <th>Description Chinese</th>
+                                            <th>Unit Price</th>
+                                            <th>Default Quantity</th>
+                                            <th>Quantity Multiples</th>
+                                        </thead>
+                                        <tbody>
                                             
-                                        </div>
-                                        <button type="submit" class="btn btn-info btn-fill pull-right">Update Profile</button>
-                                        <div class="clearfix"></div>
-                                    </form>
+                                        <form action="deleteMultipleController" method="post">
+
+                                            <%  
+                                            for (Integer number : catalogueMap.keySet()) {
+                                                out.print("<tr>");
+                                                OrderItem orderItem = catalogueMap.get(number);
+                                                out.print("<td><input type='checkbox' name='recordsToBeDeleted' value='"+ orderItem.getItemCode() +"'></td>");
+                                                out.print("<td>" + orderItem.getItemCode() + "</td>");
+                                                out.print("<td><img src='" + orderItem.getImageURL() + "' style='width:50px;height:50px;' ></td>");
+                                                out.print("<td>" + orderItem.getDescription() + "</td>");
+                                                out.print("<td>" + orderItem.getDescriptionChinese() + "</td>");
+                                                out.print("<td>" + orderItem.getUnitPrice() + "</td>");
+                                                out.print("<td>" + orderItem.getDefaultQuantity() + "</td>");
+                                                out.print("<td>" + orderItem.getQuantityMultiples() + "</td>");
+                                                out.print("<td><a href='edit.jsp?itemCode="+orderItem.getItemCode()+"'>Edit</a></td>");
+                                                out.print("<td><a href='deleteConfirmation.jsp?itemCode="+orderItem.getItemCode()+"'>Delete</a></td>");
+                                                out.print("</tr>");  
+                                            }
+                                            
+                                            %>
+                                            <a href="search.jsp"><input class="btn btn-info btn-fill pull-left" type="button" name="search"  value="Search" style="margin:1px;"/></a>
+                                            <a href="catalogue.jsp"><input class="btn btn-info btn-fill pull-right" type="button" name="Catalogue"  value="Catalogue" style="margin:1px;" /></a>
+                                            <a href="subsequentDaysOrder.jsp"><input class="btn btn-info btn-fill pull-right" type="button" name="Subsequent days order"  value="Subsequent days order" style="margin:1px;" /></a>
+                                            </tbody>
+                                    </table>
+                                            <br>
+                                            <input type="submit" class="btn btn-info btn-fill pull-right" value="Delete records"> 
+                                        
+                                        </form>   
+
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-4">
-                            <div class="card card-user">
-                                <div class="card-image">
-                                    <img src="assets/limkee/jquerypic5.jpg" alt="...">
-                                </div>
-                                <div class="card-body">
-                                    <div class="author">
-                                        <a href="#">
-                                            <img class="avatar border-gray" src="../assets/limkee/jquerypic5.jpg" alt="...">
-                                            <h5 class="title">Mike Andrew</h5>
-                                        </a>
-                                        <p class="description">
-                                            michael24
-                                        </p>
-                                    </div>
-                                    <p class="description text-center">
-                                        "Lamborghini Mercy
-                                        <br> Your chick she so thirsty
-                                        <br> I'm in that two seat Lambo"
-                                    </p>
-                                </div>
-                                <hr>
-                                <div class="button-container mr-auto ml-auto">
-                                    <button href="#" class="btn btn-simple btn-link btn-icon">
-                                        <i class="fa fa-facebook-square"></i>
-                                    </button>
-                                    <button href="#" class="btn btn-simple btn-link btn-icon">
-                                        <i class="fa fa-twitter"></i>
-                                    </button>
-                                    <button href="#" class="btn btn-simple btn-link btn-icon">
-                                        <i class="fa fa-google-plus-square"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
+
             <footer class="footer">
                 <div class="container">
                     <nav>
@@ -294,85 +273,7 @@
             </footer>
         </div>
     </div>
-    <!--   -->
-    <!-- <div class="fixed-plugin">
-    <div class="dropdown show-dropdown">
-        <a href="#" data-toggle="dropdown">
-            <i class="fa fa-cog fa-2x"> </i>
-        </a>
 
-        <ul class="dropdown-menu">
-			<li class="header-title"> Sidebar Style</li>
-            <li class="adjustments-line">
-                <a href="javascript:void(0)" class="switch-trigger">
-                    <p>Background Image</p>
-                    <label class="switch">
-                        <input type="checkbox" data-toggle="switch" checked="" data-on-color="primary" data-off-color="primary"><span class="toggle"></span>
-                    </label>
-                    <div class="clearfix"></div>
-                </a>
-            </li>
-            <li class="adjustments-line">
-                <a href="javascript:void(0)" class="switch-trigger background-color">
-                    <p>Filters</p>
-                    <div class="pull-right">
-                        <span class="badge filter badge-black" data-color="black"></span>
-                        <span class="badge filter badge-azure" data-color="azure"></span>
-                        <span class="badge filter badge-green" data-color="green"></span>
-                        <span class="badge filter badge-orange" data-color="orange"></span>
-                        <span class="badge filter badge-red" data-color="red"></span>
-                        <span class="badge filter badge-purple active" data-color="purple"></span>
-                    </div>
-                    <div class="clearfix"></div>
-                </a>
-            </li>
-            <li class="header-title">Sidebar Images</li>
-
-            <li class="active">
-                <a class="img-holder switch-trigger" href="javascript:void(0)">
-                    <img src="../assets/img/sidebar-1.jpg" alt="" />
-                </a>
-            </li>
-            <li>
-                <a class="img-holder switch-trigger" href="javascript:void(0)">
-                    <img src="../assets/img/sidebar-3.jpg" alt="" />
-                </a>
-            </li>
-            <li>
-                <a class="img-holder switch-trigger" href="javascript:void(0)">
-                    <img src="..//assets/img/sidebar-4.jpg" alt="" />
-                </a>
-            </li>
-            <li>
-                <a class="img-holder switch-trigger" href="javascript:void(0)">
-                    <img src="../assets/img/sidebar-5.jpg" alt="" />
-                </a>
-            </li>
-
-            <li class="button-container">
-                <div class="">
-                    <a href="http://www.creative-tim.com/product/light-bootstrap-dashboard" target="_blank" class="btn btn-info btn-block btn-fill">Download, it's free!</a>
-                </div>
-            </li>
-
-            <li class="header-title pro-title text-center">Want more components?</li>
-
-            <li class="button-container">
-                <div class="">
-                    <a href="http://www.creative-tim.com/product/light-bootstrap-dashboard-pro" target="_blank" class="btn btn-warning btn-block btn-fill">Get The PRO Version!</a>
-                </div>
-            </li>
-
-            <li class="header-title" id="sharrreTitle">Thank you for sharing!</li>
-
-            <li class="button-container">
-				<button id="twitter" class="btn btn-social btn-outline btn-twitter btn-round sharrre"><i class="fa fa-twitter"></i> · 256</button>
-                <button id="facebook" class="btn btn-social btn-outline btn-facebook btn-round sharrre"><i class="fa fa-facebook-square"></i> · 426</button>
-            </li>
-        </ul>
-    </div>
-</div>
- -->
 </body>
 <!--   Core JS Files   -->
 <script src="assets/js/core/jquery.3.2.1.min.js" type="text/javascript"></script>
@@ -390,12 +291,11 @@
 <script src="assets/js/light-bootstrap-dashboard.js?v=2.0.1" type="text/javascript"></script>
 <!-- Light Bootstrap Dashboard DEMO methods, don't include it in your project! -->
 <script src="assets/js/demo.js"></script>
-
 <script type="text/javascript">
     $(document).ready(function() {
         // Javascript method's body can be found in assets/js/demos.js
         demo.initDashboardPageCharts();
-        demo.showNotification();
+
     });
 </script>
 

@@ -45,13 +45,13 @@ public class loginUtility {
             return;
         }*/
         if("".equals(userName)||"".equals(passWord)){
-            request.setAttribute("errorMsg", "Please enter your username and/or password");
+            request.setAttribute("errorMsg", "Please enter username and/or password 请填写用户名和/或密码");
             request.getRequestDispatcher("login.jsp").forward(request, response);
             return;           
         }
         if (user == null || !user.authenticate(passWordHash)) {
             // TODO: include error messages before redirecting
-            request.setAttribute("errorMsg", "Invalid username and/or password");
+            request.setAttribute("errorMsg", "Invalid username and/or password 用户名和/或密码错误");
             request.getRequestDispatcher("login.jsp").forward(request, response);
             return;
         }

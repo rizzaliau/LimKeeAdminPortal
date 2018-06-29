@@ -1,17 +1,22 @@
+<%-- 
+    Document   : analytics
+    Created on : 27 May, 2018, 5:40:58 PM
+    Author     : Rizza
+--%>
+
 <!DOCTYPE html>
 
 <%@include file="protect.jsp" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <html lang="en">
-    
 
 <head>
-    <meta charset="UTF-8">
+    <meta charset="utf-8" />
     <link rel="apple-touch-icon" sizes="76x76" href="assets/img/apple-icon.png">
     <link rel="icon" type="image/png" href="assets/img/favicon.ico">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-    <title>Lim Kee Admin Portal</title>
+    <title>Light Bootstrap Dashboard - Free Bootstrap 4 Admin Dashboard by Creative Tim</title>
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
     <!--     Fonts and icons     -->
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
@@ -35,26 +40,25 @@
             <div class="sidebar-wrapper">
                 <div class="logo">
                     <a href="#" class="simple-text">
-                        LIM KEE Admin Portal 下载谷
+                        LIM KEE Admin Portal
                     </a>
-                        <!--  Welcome-->
+                        Welcome
                         <%
                         String userName = request.getParameter("user");
                         String passWord = request.getParameter("password");
                         //String gender = (String)request.getAttribute("gender");
-                        //out.println(userName);
+                        out.println(userName);
                         
-                        String usernameSession = (String)session.getAttribute("username");
+                        //String passwordSha256 = (String)session.getAttribute("password");
                         
-                        //out.println(usernameSession);
-                        
-                        //out.println("Username retrieved from session is:"+usernameSession);
+                        //out.println(passwordSha256);
                         
                         %>
+
                 </div>
                 <ul class="nav">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="dashboard.jsp">
+                    <li>
+                        <a class="nav-link" href="dashboard.html">
                             <i class="nc-icon nc-chart-pie-35"></i>
                             <p>Dashboard</p>
                         </a>
@@ -66,13 +70,13 @@
                         </a>
                     </li>
                     <li>
-                        <a class="nav-link" href="./salesOrderMGMT.jsp">
+                        <a class="nav-link" href="./table.html">
                             <i class="nc-icon nc-notes"></i>
                             <p>Sales Order Mgmt</p>
                         </a>
                     </li>
-                    <li>
-                        <a class="nav-link" href="analytics.jsp">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="./typography.html">
                             <i class="nc-icon nc-paper-2"></i>
                             <p>Analytics</p>
                         </a>
@@ -102,7 +106,7 @@
             <!-- Navbar -->
             <nav class="navbar navbar-expand-lg " color-on-scroll="500">
                 <div class=" container-fluid  ">
-                    <a class="navbar-brand" href="dashboard.jsp"> Dashboard </a>
+                    <a class="navbar-brand" href="#pablo"> Dashboard </a>
                     <button href="" class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-bar burger-lines"></span>
                         <span class="navbar-toggler-bar burger-lines"></span>
@@ -112,7 +116,7 @@
                         <ul class="nav navbar-nav mr-auto">
                             <li class="nav-item">
                                 <a href="#" class="nav-link" data-toggle="dropdown">
-                                    
+                                    <i class="nc-icon nc-palette"></i>
                                     <span class="d-lg-none">Dashboard</span>
                                 </a>
                             </li>
@@ -130,8 +134,19 @@
                                     <a class="dropdown-item" href="#">New Order 5</a>
                                 </ul>
                             </li>
+                            <li class="nav-item">
+                                <a href="#" class="nav-link">
+                                    <i class="nc-icon nc-zoom-split"></i>
+                                    <span class="d-lg-block">&nbsp;Search</span>
+                                </a>
+                            </li>
                         </ul>
                         <ul class="navbar-nav ml-auto">
+                            <li class="nav-item">
+                                <a class="nav-link" href="#pablo">
+                                    <span class="no-icon">Account</span>
+                                </a>
+                            </li>
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <span class="no-icon">Dropdown</span>
@@ -157,106 +172,32 @@
             <!-- End Navbar -->
             <div class="content">
                 <div class="container-fluid">
+
                     <div class="row">
-                        <div class="col-md-8">
-                            <div class="card">
-                                <div class="card-header">
-                                    <h4 class="card-title">Edit account</h4>
+                        <div class="col-md-6">
+                            <div class="card ">
+                                <div class="card-header ">
+                                    <h4 class="card-title">2017 Sales</h4>
+                                    <p class="card-category">All products including Taxes</p>
                                 </div>
-                                
-                                <div class="col-md-8"><font color="red">
-                                 <%                                
-                                    //String passwordErrorMsg = (String) request.getAttribute("diffPassword");
-                                    //String passwordUpdate = (String)request.getAttribute("updateSuccess");
-                                    String status = (String)request.getAttribute("status");
-                                    
-                                    
-//                                    if (passwordErrorMsg != null) {
-//                                        out.print("</br>");
-//                                        out.print(passwordErrorMsg);
-//                                        out.print("</br>");
-//                                    }
-//                                    
-//                                    if (passwordUpdate!=null){
-//                                        out.print("</br>");
-//                                        out.print(passwordUpdate);
-//                                        out.print("</br>");
-//                                    }
-
-                                    if (status!=null){
-                                        out.print("</br>");
-                                        out.print(status);
-                                        out.print("</br>");
-                                    }
-
-
-
-
-                                %> 
-                                </div></font>
-                                
-                                <div class="card-body">
-                                    <form method="post" accept-charset="utf-8" action="changePasswordController" >
-                                        <div class="row">
-                                            <div class="col-md-5 pr-1">
-                                                <div class="form-group">
-                                                    <label>New Password</label>
-                                                    <input type="password" name="newPass1" class="form-control" placeholder="Password">
-                                                </div>
-                                            </div>
-                                            <div class="col-md-4 pl-1">
-                                                <div class="form-group">
-                                                    <label for="exampleInputEmail1">Re-enter New Password</label>
-                                                    <input type="password" name="newPass2" class="form-control" placeholder="Password">
-                                                </div>
-                                            </div>
-                                            
-                                        </div>
-                                        <button type="submit" class="btn btn-info btn-fill pull-right">Update Profile</button>
-                                        <div class="clearfix"></div>
-                                    </form>
+                                <div class="card-body ">
+                                    <div id="chartActivity" class="ct-chart"></div>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="card card-user">
-                                <div class="card-image">
-                                    <img src="assets/limkee/jquerypic5.jpg" alt="...">
-                                </div>
-                                <div class="card-body">
-                                    <div class="author">
-                                        <a href="#">
-                                            <img class="avatar border-gray" src="../assets/limkee/jquerypic5.jpg" alt="...">
-                                            <h5 class="title">Mike Andrew</h5>
-                                        </a>
-                                        <p class="description">
-                                            michael24
-                                        </p>
+                                <div class="card-footer ">
+                                    <div class="legend">
+                                        <i class="fa fa-circle text-info"></i> Traditional Paus
+                                        <i class="fa fa-circle text-danger"></i> Wholemeal Paus
                                     </div>
-                                    <p class="description text-center">
-                                        "Lamborghini Mercy
-                                        <br> Your chick she so thirsty
-                                        <br> I'm in that two seat Lambo"
-                                    </p>
-                                </div>
-                                <hr>
-                                <div class="button-container mr-auto ml-auto">
-                                    <button href="#" class="btn btn-simple btn-link btn-icon">
-                                        <i class="fa fa-facebook-square"></i>
-                                    </button>
-                                    <button href="#" class="btn btn-simple btn-link btn-icon">
-                                        <i class="fa fa-twitter"></i>
-                                    </button>
-                                    <button href="#" class="btn btn-simple btn-link btn-icon">
-                                        <i class="fa fa-google-plus-square"></i>
-                                    </button>
+                                    <hr>
+                                    <div class="stats">
+                                        <i class="fa fa-check"></i> Data information certified
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            
             <footer class="footer">
                 <div class="container">
                     <nav>
@@ -390,12 +331,13 @@
 <script src="assets/js/light-bootstrap-dashboard.js?v=2.0.1" type="text/javascript"></script>
 <!-- Light Bootstrap Dashboard DEMO methods, don't include it in your project! -->
 <script src="assets/js/demo.js"></script>
-
 <script type="text/javascript">
     $(document).ready(function() {
         // Javascript method's body can be found in assets/js/demos.js
         demo.initDashboardPageCharts();
+
         demo.showNotification();
+
     });
 </script>
 

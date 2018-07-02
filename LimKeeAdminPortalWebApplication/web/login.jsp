@@ -44,7 +44,7 @@
 
                     %> 
                     </font>
-                    <span class="logmod__heading-subtitle">Enter your user and password 下载谷 <strong>to sign in</strong></span>
+                    <span class="logmod__heading-subtitle">Enter your user and password <strong>to sign in</strong> 请填写用户名和/或密码</span>
                 </div> 
                 
                 

@@ -35,10 +35,11 @@
                 <div class="sidebar-wrapper">
                     <div class="logo">
                         <a href="#" class="simple-text">
-                            LIM KEE Admin Portal 下载谷
+                            LIM KEE Admin Portal
                         </a>
                         <!--  Welcome-->
-                        <%                            String userName = request.getParameter("user");
+                        <%                            
+                            String userName = request.getParameter("user");
                             String passWord = request.getParameter("password");
                             //String gender = (String)request.getAttribute("gender");
                             //out.println(userName);
